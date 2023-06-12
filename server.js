@@ -13,6 +13,15 @@ app.get("/blog", (req, res) => {
   res.send("Hello Blog");
 });
 
+app.get("/studentDetails", async (req, res) => {
+  try {
+    const student = await Student.find({});
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.post("/studentDetails", async (req, res) => {
   try {
     const student = await Student.create(req.body);
