@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 app.get("/blog", (req, res) => {
   res.send("Hello Blog");
 });
-
+//Fetch all the student details
 app.get("/studentDetails", async (req, res) => {
   try {
     const student = await Student.find({});
@@ -22,7 +22,7 @@ app.get("/studentDetails", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
+//Fetch a single student by Id
 app.get("/studentDetails/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -32,7 +32,7 @@ app.get("/studentDetails/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
+//Update
 app.put("/studentDetails/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -49,7 +49,7 @@ app.put("/studentDetails/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
+//Delete
 app.delete("/studentDetails/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -64,7 +64,7 @@ app.delete("/studentDetails/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
+//Create
 app.post("/studentDetails", async (req, res) => {
   try {
     const student = await Student.create(req.body);
