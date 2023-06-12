@@ -4,6 +4,7 @@ const Student = require("./models/StudentModel");
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
   res.send("Hello NODE API");
@@ -44,6 +45,21 @@ app.put("/studentDetails/:id", async (req, res) => {
     }
     const updatedStudent = await Student.findById(id);
     res.status(200).json(updatedStudent);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.delete("/studentDetails/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const student = await Student.findByIdAndDelete(id);
+    if (!student) {
+      return res
+        .status(404)
+        .json({ message: `cannot find any student with ID ${id}` });
+    }
+    res.status(200).json(student);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
