@@ -39,10 +39,7 @@ const StudentSchema = mongoose.Schema({
       message: "Invalid phone number",
     },
   },
-  {
-    timestamps:true
-  }
 });
 
-const Student = mongoose.model('Student',StudentSchema);
+const Student = mongoose.model("Student", StudentSchema);
 module.exports = Student;
