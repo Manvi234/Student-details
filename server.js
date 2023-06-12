@@ -32,6 +32,23 @@ app.get("/studentDetails/:id", async (req, res) => {
   }
 });
 
+app.put("/studentDetails/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const student = await Student.findByIdAndUpdate(id, req.body);
+    // we cannot find any product in database
+    if (!student) {
+      return res
+        .status(404)
+        .json({ message: `cannot find any student with ID ${id}` });
+    }
+    const updatedStudent = await Student.findById(id);
+    res.status(200).json(updatedStudent);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.post("/studentDetails", async (req, res) => {
   try {
     const student = await Student.create(req.body);
